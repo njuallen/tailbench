@@ -98,7 +98,17 @@ if [ option.get "with-cmph" ] {
   requirements += <define>HAVE_CMPH ;
 }
 
+feature.feature cpp98 :
+  on :
+  composite optional propagated
+    ;
+
+feature.compose <cpp98>on :
+  <cxxflags>"-std=c++98"
+    ;
+
 project : default-build
+  <cpp98>on
   <threading>multi
   <warnings>on
   <debug-symbols>on
@@ -107,6 +117,7 @@ project : default-build
   ;
 
 project : requirements 
+  <cpp98>on
   <threading>multi:<define>WITH_THREADS
   <threading>multi:<library>boost_thread
   <define>_FILE_OFFSET_BITS=64 <define>_LARGE_FILES
