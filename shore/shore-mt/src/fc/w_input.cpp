@@ -96,25 +96,25 @@ static enum states table_unknown[no_charclass][no_state] =
     {  new_dec,new_dec,new_oct,is_hex, is_oct, is_dec, is_hex, is_oct, is_dec, error},
     {  new_dec,new_dec,new_oct,is_hex, is_oct, is_dec, is_hex, is_oct, is_dec, error},
 /* c8_9 */
-    {  new_dec,new_dec,new_dec,is_hex, end,    is_dec, is_hex, is_oct, is_dec,error },
-    {  new_dec,new_dec,new_dec,is_hex, end,    is_dec, is_hex, is_oct, is_dec,error },
+    {  new_dec,new_dec,new_dec,is_hex, states::end,    is_dec, is_hex, is_oct, is_dec,error },
+    {  new_dec,new_dec,new_dec,is_hex, states::end,    is_dec, is_hex, is_oct, is_dec,error },
 /* ca-f */
-    {  error,error,new_hex,is_hex, end,    end,    is_hex, end,    end,   error },
-    {  error,error,new_hex,is_hex, end,    end,    is_hex, end,    end,   error },
-    {  error,error,new_hex,is_hex, end,    end,    is_hex, end,    end,   error },
-    {  error,error,new_hex,is_hex, end,    end,    is_hex, end,    end,   error },
-    {  error,error,new_hex,is_hex, end,    end,    is_hex, end,    end,   error },
-    {  error,error,new_hex,is_hex, end,    end,    is_hex, end,    end,   error },
+    {  error,error,new_hex,is_hex, states::end,    states::end,    is_hex, states::end,    states::end,   error },
+    {  error,error,new_hex,is_hex, states::end,    states::end,    is_hex, states::end,    states::end,   error },
+    {  error,error,new_hex,is_hex, states::end,    states::end,    is_hex, states::end,    states::end,   error },
+    {  error,error,new_hex,is_hex, states::end,    states::end,    is_hex, states::end,    states::end,   error },
+    {  error,error,new_hex,is_hex, states::end,    states::end,    is_hex, states::end,    states::end,   error },
+    {  error,error,new_hex,is_hex, states::end,    states::end,    is_hex, states::end,    states::end,   error },
 /* exx */
-    {  error,  error,  new_hex,end,    end,    end,    end,    end,    end,   error },
+    {  error,  error,  new_hex,states::end,    states::end,    states::end,    states::end,    states::end,    states::end,   error },
 /* JJJJ */
-    {  error,  error,  end,    no_hex, end,    end,    end,    end,    end,   error },
+    {  error,  error,  states::end,    no_hex, states::end,    states::end,    states::end,    states::end,    states::end,   error },
 /* EOF, eofile */
-    {  error,  error,  end,    no_hex, end,    end,    end,    end,    end,   error },
+    {  error,  error,  states::end,    no_hex, states::end,    states::end,    states::end,    states::end,    states::end,   error },
 /* white */
-    {  start,  error,  end,    end,    end,    end,    end,    end,    end,   error },
+    {  start,  error,  states::end,    states::end,    states::end,    states::end,    states::end,    states::end,    states::end,   error },
 /* sign */
-    {  sgned,  error,  end,    no_hex, end,    end,    end,    end,    end,   error }, 
+    {  sgned,  error,  states::end,    no_hex, states::end,    states::end,    states::end,    states::end,    states::end,   error }, 
 };
 
 static enum states table_base16[no_charclass][no_state] =
@@ -141,15 +141,15 @@ static enum states table_base16[no_charclass][no_state] =
     {  is_hex,    is_hex, is_hex, is_hex, error,error,is_hex, error, error, error },
     {  is_hex,    is_hex, is_hex, is_hex, error,error,is_hex, error, error, error },
 /* exx */
-    {  error,  error, new_hex, end,    error,error,  end,   error, error, error },
+    {  error,  error, new_hex, states::end,    error,error,  states::end,   error, error, error },
 /* JJJJ */
-    {  error,  error,  end,    no_hex, error,error,  end,   error, error, error }, 
+    {  error,  error,  states::end,    no_hex, error,error,  states::end,   error, error, error }, 
 /* EOF, eofile */
-    {  error,  error,  end,    no_hex, error,error,  end,   error, error, error }, 
+    {  error,  error,  states::end,    no_hex, error,error,  states::end,   error, error, error }, 
 /* white */
-    {  start,  error,  end,    no_hex, error,error,  end,   error, error, error }, 
+    {  start,  error,  states::end,    no_hex, error,error,  states::end,   error, error, error }, 
 /* sign */
-    {  sgned,  error,  end,    no_hex, error,error,  end,   error, error, error }, 
+    {  sgned,  error,  states::end,    no_hex, error,error,  states::end,   error, error, error }, 
 };
 
 static enum states table_base8[no_charclass][no_state] =
@@ -166,25 +166,25 @@ static enum states table_base8[no_charclass][no_state] =
     {  is_oct,is_oct, is_oct, error, error, error, error, is_oct, error,error },
     {  is_oct,is_oct, is_oct, error, error, error, error, is_oct, error,error },
 /* c8_9 */
-    {  end,   error,  end,    error, error, error, error, end,   error,    error },
-    {  end,   error,  end,    error, error, error, error, end,   error,    error },
+    {  states::end,   error,  states::end,    error, error, error, error, states::end,   error,    error },
+    {  states::end,   error,  states::end,    error, error, error, error, states::end,   error,    error },
 /* ca-f */
-    {  end,   error,  end,    error, error,error,  error, end,   error, error },
-    {  end,   error,  end,    error, error,error,  error, end,   error, error },
-    {  end,   error,  end,    error, error,error,  error, end,   error, error },
-    {  end,   error,  end,    error, error,error,  error, end,   error, error },
-    {  end,   error,  end,    error, error,error,  error, end,   error, error },
-    {  end,   error,  end,    error, error,error,  error, end,   error, error },
+    {  states::end,   error,  states::end,    error, error,error,  error, states::end,   error, error },
+    {  states::end,   error,  states::end,    error, error,error,  error, states::end,   error, error },
+    {  states::end,   error,  states::end,    error, error,error,  error, states::end,   error, error },
+    {  states::end,   error,  states::end,    error, error,error,  error, states::end,   error, error },
+    {  states::end,   error,  states::end,    error, error,error,  error, states::end,   error, error },
+    {  states::end,   error,  states::end,    error, error,error,  error, states::end,   error, error },
 /* exx */
-    {  error, error,  new_hex,end,   error,error,  end,   error, error, error },
+    {  error, error,  new_hex,states::end,   error,error,  states::end,   error, error, error },
 /* JJJJ */
-    {  error, error, end,     error, error,error,  error, end,      error, error }, 
+    {  error, error, states::end,     error, error,error,  error, states::end,      error, error }, 
 /* EOF, eofile */
-    {  error, error, end,     error, error,error,  error, end,      error, error }, 
+    {  error, error, states::end,     error, error,error,  error, states::end,      error, error }, 
 /* white */
-    {  start, error, end,     error, error,error,  error, end,      error, error }, 
+    {  start, error, states::end,     error, error,error,  error, states::end,      error, error }, 
 /* sign */
-    {  sgned, error, end,     error, error,error,  error, end,      error, error }, 
+    {  sgned, error, states::end,     error, error,error,  error, states::end,      error, error }, 
 };
 
 static enum states table_base10[no_charclass][no_state] =
@@ -203,25 +203,25 @@ static enum states table_base10[no_charclass][no_state] =
     {  is_dec,is_dec, is_dec, error, error, error, error, error, is_dec,error },
     {  is_dec,is_dec, is_dec, error, error, error, error, error, is_dec,error },
 /* c8_9 */
-    {  is_dec,is_dec, end,    error, error, error, error, end,   is_dec,error },
-    {  is_dec,is_dec, end,    error, error, error, error, end,   is_dec,error },
+    {  is_dec,is_dec, states::end,    error, error, error, error, states::end,   is_dec,error },
+    {  is_dec,is_dec, states::end,    error, error, error, error, states::end,   is_dec,error },
 /* ca-f */
-    {  end,   error,  end,    error, error,error,  error, end,   error, error },
-    {  end,   error,  end,    error, error,error,  error, end,   error, error },
-    {  end,   error,  end,    error, error,error,  error, end,   error, error },
-    {  end,   error,  end,    error, error,error,  error, end,   error, error },
-    {  end,   error,  end,    error, error,error,  error, end,   error, error },
-    {  end,   error,  end,    error, error,error,  error, end,   error, error },
+    {  states::end,   error,  states::end,    error, error,error,  error, states::end,   error, error },
+    {  states::end,   error,  states::end,    error, error,error,  error, states::end,   error, error },
+    {  states::end,   error,  states::end,    error, error,error,  error, states::end,   error, error },
+    {  states::end,   error,  states::end,    error, error,error,  error, states::end,   error, error },
+    {  states::end,   error,  states::end,    error, error,error,  error, states::end,   error, error },
+    {  states::end,   error,  states::end,    error, error,error,  error, states::end,   error, error },
 /* exx */
-    {  error, error, new_hex, end,   error,error,  end,   error, error, error },
+    {  error, error, new_hex, states::end,   error,error,  states::end,   error, error, error },
 /* JJJJ */
-    {  error, error, end,     error, error,error,  error, error, end,   error }, 
+    {  error, error, states::end,     error, error,error,  error, error, states::end,   error }, 
 /* EOF, eofile */
-    {  error, error, end,     error, error,error,  error, error, end,   error }, 
+    {  error, error, states::end,     error, error,error,  error, error, states::end,   error }, 
 /* white */
-    {  start, error, end,     error, error,error,  error, error, end,   error }, 
+    {  start, error, states::end,     error, error,error,  error, error, states::end,   error }, 
 /* sign */
-    {  sgned, error, end,     error, error,error,  error, error, end,   error }, 
+    {  sgned, error, states::end,     error, error,error,  error, error, states::end,   error }, 
 };
 
 
@@ -334,7 +334,7 @@ w_base_t::_scan_uint8(
 
     int ich;
     char ch;
-    while (s < end) {
+    while (s < states::end) {
     ch = 0;
     // if (i) {
         ich = i.get();
@@ -360,7 +360,7 @@ w_base_t::_scan_uint8(
         case start:
         /* Have seen leading white space */
         if(!skip_white) {
-            s = end;
+            s = states::end;
         }
         tell_start += chewamt; 
         break;
@@ -384,14 +384,14 @@ w_base_t::_scan_uint8(
         if(base && (base != 4)) {
             /* consider this the end of the string */
             IOS_BACK(i, ch);
-            s = end;
+            s = states::end;
             break;
         }
         w_assert9(base == 0 || base == 4);
         if((base == 0) && (e != exx)) {
             /* consider this the end of the string */
             IOS_BACK(i, ch);
-            s = end;
+            s = states::end;
             break;
         }
             /* at this point, in the 0[xX] case, 
@@ -442,7 +442,7 @@ w_base_t::_scan_uint8(
             if(base && base != 10) {
             /* consider this the end of the string */
             IOS_BACK(i, ch);
-            s = end;
+            s = states::end;
             break;
             }
         }
@@ -508,15 +508,15 @@ w_base_t::_scan_uint8(
         case error:
         IOS_FAIL(i);
         i.seekg(tell_start);
-        s = end;
+        s = states::end;
         break;
 
         case no_hex:
         i.seekg(tell_start);
-        s = end;
+        s = states::end;
         break;
 
-        case end:
+        case states::end:
             IOS_BACK(i, ch);
         break;
 

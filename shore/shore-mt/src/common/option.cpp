@@ -834,8 +834,13 @@ w_rc_t option_stream_scan_t::scan(
     DBG(<<"scanning options stream " << _label);
 
     w_rc_t rc;
-    while ( !rc.is_error() && (_input.getline(_line, _maxLineLen) != NULL) ) {
-            _lineNum++;
+    while (!rc.is_error()) {
+        _input.getline(_line, _maxLineLen);
+        // finished
+        if (_line[0] == '\0')
+            break;
+
+        _lineNum++;
         DBG(<<"scan line " << _lineNum);
         
         if (strlen(_line)+1 >= _maxLineLen) {
