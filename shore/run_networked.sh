@@ -11,7 +11,9 @@ MAXREQS=2000
 DUMMYREQS=1000000 # set this really high so MAXREQS controls execution
 
 # Point this to an appropriate location on your system
-SCRATCH_DIR=/doesnotexist
+# note: instead of setting it here, we better get it from ../configs.sh
+# so I anotated it out
+# SCRATCH_DIR=/doesnotexist
 
 # Setup
 TMP=$(mktemp -d --tmpdir=${SCRATCH_DIR})
