@@ -3,10 +3,13 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source ${DIR}/../configs.sh
 
+# 必须要specify一下这个libxapian.so的位置，不然在启动程序时，它在通用的位置找不到它
+export LD_LIBRARY_PATH=~/kernel_interference/tailbench/tailbench-v0.9/xapian/xapian-core-1.2.13/install/lib
+
 NSERVERS=1
 QPS=500
 WARMUPREQS=1000
-REQUESTS=3000
+REQUESTS=5000
 
 TBENCH_MAXREQS=${REQUESTS} TBENCH_WARMUPREQS=${WARMUPREQS} \
     chrt -r 99 ./xapian_networked_server -n ${NSERVERS} -d ${DATA_ROOT}/xapian/wiki \

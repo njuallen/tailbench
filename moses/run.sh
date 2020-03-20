@@ -4,9 +4,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source ${DIR}/../configs.sh
 
 THREADS=1
-QPS=100
+QPS=500
 WARMUPREQS=500
-MAXREQS=500
+MAXREQS=5000
 
 BIN=./bin/moses_integrated
 
