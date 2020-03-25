@@ -39,10 +39,11 @@ if __name__ == '__main__':
             f.write("%12s | %12s | %12s\n" \
                     % ('%.3f' % q, '%.3f' % svc, '%.3f' % sjrn))
         f.close()
+        p50 = stats.scoreatpercentile(sjrnTimes, 50)
         p95 = stats.scoreatpercentile(sjrnTimes, 95)
         maxLat = max(sjrnTimes)
-        print "95th percentile latency %.3f ms | max latency %.3f ms" \
-                % (p95, maxLat)
+        print "50th percentile latency %.3f ms | 95th percentile latency %.3f ms | max latency %.3f ms" \
+                % (p50, p95, maxLat)
 
     latsFile = sys.argv[1]
     getLatPct(latsFile)
