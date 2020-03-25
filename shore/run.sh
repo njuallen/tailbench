@@ -4,9 +4,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source ${DIR}/../configs.sh
 
 THREADS=1
-QPS=400
-WARMUPREQS=10000
-MAXREQS=4000
+QPS=10
+WARMUPREQS=50
+MAXREQS=250
 
 DUMMYREQS=1000000 # set this really high so MAXREQS controls execution
 
@@ -37,7 +37,7 @@ sed -i -e "s#@NTHREADS#$THREADS#g" shore.conf
 
 # Run app
 TBENCH_QPS=${QPS} TBENCH_MAXREQS=${MAXREQS} TBENCH_WARMUPREQS=${WARMUPREQS} \
-    TBENCH_MINSLEEPNS=10000 chrt -r 99 ${BIN} -i cmdfile
+    TBENCH_MINSLEEPNS=10000 ${BIN} -i cmdfile
 
 # Cleanup
 rm -f log scratch cmdfile db-tpcc-1 diskrw shore.conf info

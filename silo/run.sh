@@ -4,12 +4,12 @@
 NUM_WAREHOUSES=1
 NUM_THREADS=1
 
-QPS=5000
+QPS=1000
 MAXREQS=50000
 WARMUPREQS=20000
 
 TBENCH_QPS=${QPS} TBENCH_MAXREQS=${MAXREQS} TBENCH_WARMUPREQS=${WARMUPREQS} \
-    TBENCH_MINSLEEPNS=10000 chrt -r 99 \
+    TBENCH_MINSLEEPNS=10000 \
     ./out-perf.masstree/benchmarks/dbtest_integrated --verbose \
     --bench tpcc --num-threads ${NUM_THREADS} --scale-factor ${NUM_WAREHOUSES} \
     --retry-aborted-transactions --ops-per-worker 10000000

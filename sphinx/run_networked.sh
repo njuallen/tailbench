@@ -7,7 +7,7 @@ THREADS=1
 AUDIO_SAMPLES='audio_samples'
 
 LD_LIBRARY_PATH=./sphinx-install/lib:${LD_LIBRARY_PATH} \
-    TBENCH_MAXREQS=10 TBENCH_WARMUPREQS=10 \
+    TBENCH_MAXREQS=25 TBENCH_WARMUPREQS=10 \
     ./decoder_server_networked -t $THREADS &
 
 echo $! > server.pid

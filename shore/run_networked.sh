@@ -4,9 +4,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source ${DIR}/../configs.sh
 
 THREADS=1
-QPS=400
-WARMUPREQS=10000
-MAXREQS=4000
+QPS=10
+WARMUPREQS=50
+MAXREQS=250
 
 DUMMYREQS=1000000 # set this really high so MAXREQS controls execution
 
@@ -35,14 +35,14 @@ sed -i -e "s#@NTHREADS#$THREADS#g" shore.conf
 
 # Launch Server
 TBENCH_MAXREQS=${MAXREQS} TBENCH_WARMUPREQS=${WARMUPREQS} \
-    chrt -r 99 shore-kits/shore_kits_server_networked -i cmdfile &
+    shore-kits/shore_kits_server_networked -i cmdfile &
 echo $! > server.pid
 
 sleep 5
 
 # Launch Client
 TBENCH_QPS=${QPS} TBENCH_MINSLEEPNS=10000 \
-     chrt -r 99 shore-kits/shore_kits_client_networked -i cmdfile &
+     shore-kits/shore_kits_client_networked -i cmdfile &
 echo $! > client.pid
 
 wait $(cat client.pid)

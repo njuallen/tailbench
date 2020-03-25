@@ -6,7 +6,7 @@ source ${DIR}/../configs.sh
 THREADS=1
 REQS=100000000 # Set this very high; the harness controls maxreqs
 
-TBENCH_WARMUPREQS=5000 TBENCH_MAXREQS=10000 ./img-dnn_server_networked \
+TBENCH_WARMUPREQS=5000 TBENCH_MAXREQS=12500 ./img-dnn_server_networked \
     -r ${THREADS} -f ${DATA_ROOT}/img-dnn/models/model.xml -n ${REQS} &
 echo $! > server.pid
 
