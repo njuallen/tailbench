@@ -131,6 +131,10 @@ void Client::_startRoi() {
     assert(status == WARMUP);
     status = ROI;
 
+    delete dist;
+    uint64_t curNs = getCurNs();
+    dist = new ExpDist(lambda, seed, curNs);
+
     queueTimes.clear();
     svcTimes.clear();
     sjrnTimes.clear();
