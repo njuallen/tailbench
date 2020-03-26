@@ -54,6 +54,3 @@ rm -f log scratch cmdfile db-tpcc-1 diskrw shore.conf info server.pid \
     client.pid
 
 ../utilities/parselats.py ./lats.bin
-
-mv lats.bin lats.net.bin
-mv lats.txt lats.net.txt

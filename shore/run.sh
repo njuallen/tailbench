@@ -43,6 +43,3 @@ TBENCH_QPS=${QPS} TBENCH_MAXREQS=${MAXREQS} TBENCH_WARMUPREQS=${WARMUPREQS} \
 rm -f log scratch cmdfile db-tpcc-1 diskrw shore.conf info
 
 ../utilities/parselats.py ./lats.bin
-
-mv lats.bin lats.int.bin
-mv lats.txt lats.int.txt
