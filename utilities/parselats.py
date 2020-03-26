@@ -4,6 +4,7 @@ import sys
 import os
 import numpy as np
 from scipy import stats
+from scipy import mean
 
 class Lat(object):
     def __init__(self, fileName):
@@ -39,11 +40,17 @@ if __name__ == '__main__':
             f.write("%12s | %12s | %12s\n" \
                     % ('%.3f' % q, '%.3f' % svc, '%.3f' % sjrn))
         f.close()
-        p50 = stats.scoreatpercentile(sjrnTimes, 50)
-        p95 = stats.scoreatpercentile(sjrnTimes, 95)
-        maxLat = max(sjrnTimes)
-        print "50th percentile latency %.3f ms | 95th percentile latency %.3f ms | max latency %.3f ms" \
-                % (p50, p95, maxLat)
+        svc_mean = mean(svcTimes)
+        svc_p95 = stats.scoreatpercentile(svcTimes, 95)
+        svc_maxLat = max(svcTimes)
+
+        sjrn_mean = mean(sjrnTimes)
+        sjrn_p95 = stats.scoreatpercentile(sjrnTimes, 95)
+        sjrn_maxLat = max(sjrnTimes)
+        print "svc: mean %.3f ms | p95 %.3f ms | max %.3f ms" \
+                % (svc_mean, svc_p95, svc_maxLat)
+        print "end2end: mean %.3f ms | p95 %.3f ms | max %.3f ms" \
+                % (sjrn_mean, sjrn_p95, sjrn_maxLat)
 
     latsFile = sys.argv[1]
     getLatPct(latsFile)
