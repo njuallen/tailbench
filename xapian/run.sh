@@ -7,8 +7,8 @@ source ${DIR}/../configs.sh
 export LD_LIBRARY_PATH=/home/kernel_interference/tailbench/tailbench-v0.9/xapian/xapian-core-1.2.13/install/lib
 
 NSERVERS=1
-QPS=200
-WARMUPREQS=1000
+QPS=50
+WARMUPREQS=2500
 REQUESTS=5000
 
 TBENCH_QPS=${QPS} TBENCH_MAXREQS=${REQUESTS} TBENCH_WARMUPREQS=${WARMUPREQS} \

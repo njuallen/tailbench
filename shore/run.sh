@@ -5,8 +5,8 @@ source ${DIR}/../configs.sh
 
 THREADS=1
 QPS=10
-WARMUPREQS=50
-MAXREQS=250
+WARMUPREQS=250
+MAXREQS=500
 
 DUMMYREQS=1000000 # set this really high so MAXREQS controls execution
 

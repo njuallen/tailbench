@@ -34,23 +34,8 @@ cp shore-kits/run-templates/shore.conf.template \
 sed -i -e "s#@NTHREADS#$THREADS#g" shore.conf
 
 # Launch Server
-TBENCH_MAXREQS=${MAXREQS} TBENCH_WARMUPREQS=${WARMUPREQS} \
-    shore-kits/shore_kits_server_networked -i cmdfile &
-echo $! > server.pid
-
-sleep 5
-
-# Launch Client
-TBENCH_QPS=${QPS} TBENCH_MINSLEEPNS=10000 \
-     shore-kits/shore_kits_client_networked -i cmdfile &
-echo $! > client.pid
-
-wait $(cat client.pid)
-
-# Clean up
-./kill_networked.sh
+TBENCH_SERVER="10.30.6.127" TBENCH_SERVER_PORT=3030 TBENCH_MAXREQS=${MAXREQS} TBENCH_WARMUPREQS=${WARMUPREQS} \
+    shore-kits/shore_kits_server_networked -i cmdfile
 
 rm -f log scratch cmdfile db-tpcc-1 diskrw shore.conf info server.pid \
     client.pid
-
-../utilities/parselats.py ./lats.bin

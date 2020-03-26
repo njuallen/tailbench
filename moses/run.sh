@@ -5,8 +5,8 @@ source ${DIR}/../configs.sh
 
 THREADS=1
 QPS=100
-WARMUPREQS=500
-MAXREQS=2500
+WARMUPREQS=5000
+MAXREQS=5000
 
 BIN=./bin/moses_integrated
 
