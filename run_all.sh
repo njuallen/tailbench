@@ -9,6 +9,8 @@ run_benchmark () {
     benchmark=$1
     script=$2
     cd $benchmark
+    benchmark_output_dir="$run_dir/$benchmark"
+    mkdir -p $benchmark_output_dir
     # tailbench benchmarks can only use core 0 and 1
     taskset -c 0,1 bash ./$script
 
@@ -16,8 +18,11 @@ run_benchmark () {
     echo "$benchmark:" >> $latency_output
     ../utilities/parselats.py lats.bin >> $latency_output
 
-    cp lats.bin $run_dir/$benchmark.lats.bin
-    cp lats.txt $run_dir/$benchmark.lats.txt
+    cp lats.bin $benchmark_output_dir
+    cp lats.txt $benchmark_output_dir
+    cp pidstat.out $benchmark_output_dir
+    cp ps.out $benchmark_output_dir
+    cp vmstat.out $benchmark_output_dir
     cd ..
 }
 

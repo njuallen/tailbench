@@ -16,4 +16,21 @@ sed -i -e "s#@DATA_ROOT#$DATA_ROOT#g" moses.ini
 TBENCH_QPS=${QPS} TBENCH_MAXREQS=${MAXREQS} TBENCH_WARMUPREQS=${WARMUPREQS} \
     TBENCH_MINSLEEPNS=10000 ${BIN} -config ./moses.ini \
     -input-file ${DATA_ROOT}/moses/testTerms \
-    -threads ${THREADS} -num-tasks 100000 -verbose 0
+    -threads ${THREADS} -num-tasks 100000 -verbose 0 &
+
+echo $! > integrated.pid
+
+# performance monitoring
+../utilities/pidstat.sh $(cat integrated.pid) &
+echo $! > pidstat.pid
+../utilities/ps.sh $(cat integrated.pid) &
+echo $! > ps.pid
+../utilities/vmstat.sh &
+echo $! > vmstat.pid
+
+wait $(cat integrated.pid)
+rm integrated.pid pidstat.pid ps.pid vmstat.pid
+kill $(jobs -p)
+# vmstat会spawn一个子进程，但是不知道为什么，它不会会被上面的kill杀掉
+# 所以 我们干脆手动来把它给杀了
+pkill -9 -x vmstat
